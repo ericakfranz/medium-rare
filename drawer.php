@@ -1,6 +1,6 @@
 <?php /*
 
-Readium Theme
+Medium Rare Theme
 -------------
 
 drawer.php

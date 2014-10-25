@@ -1,6 +1,6 @@
 <?php /*
 
-Readium Theme
+Medium Rare Theme
 -------------
 
 functions.php
@@ -37,7 +37,7 @@ if (!isset($content_width)) {
 /**
  * Setup Widget Areas
  */
-function readium_widget_init() {
+function mediumrare_widget_init() {
 	// Register drawer widgets
 	register_sidebar(
 		array(
@@ -64,7 +64,7 @@ function readium_widget_init() {
 		)
 	);
 }
-add_action('widgets_init', 'readium_widget_init');
+add_action('widgets_init', 'mediumrare_widget_init');
 
 /**
  * Custom Post Types
@@ -98,18 +98,18 @@ function create_post_type() {
 	);
 
 	// make the post type
-	register_post_type('readium_resource', $args);
+	register_post_type('mediumrare_resource', $args);
 }
 add_action('init', 'create_post_type');
 
 // Set the limit for resources archive
-function readium_query_mod($query) {
-	if ($query->is_post_type_archive('readium_resource') && !is_admin()) {
+function mediumrare_query_mod($query) {
+	if ($query->is_post_type_archive('mediumrare_resource') && !is_admin()) {
 		$query->set('posts_per_page', 9);
 		return;
 	}
 }
-add_action('pre_get_posts','readium_query_mod');
+add_action('pre_get_posts','mediumrare_query_mod');
 
 
 /**
@@ -117,7 +117,7 @@ add_action('pre_get_posts','readium_query_mod');
  */
 
 // Custom Header Image
-function readium_custom_header_setup() {
+function mediumrare_custom_header_setup() {
 	$header_args = array(
 		'default-image'			=> '%s/img/headers/perfect-vacation.jpg',
 		'default-text-color'	=> 'ffffff',
@@ -126,11 +126,11 @@ function readium_custom_header_setup() {
 		'flex-height' 			=> true,
 		'flex-width'			=> false,
 		'uploads'				=> true,
-		'wp-head-callback'      => 'readium_header_style',
+		'wp-head-callback'      => 'mediumrare_header_style',
 	);
 	add_theme_support('custom-header', $header_args);
 }
-add_action('after_setup_theme', 'readium_custom_header_setup');
+add_action('after_setup_theme', 'mediumrare_custom_header_setup');
 
 // Custom Header Options
 $header_options = array(
@@ -152,8 +152,8 @@ $header_options = array(
 );
 register_default_headers($header_options);
 
-if (!function_exists('readium_header_style')) :
-function readium_header_style() {
+if (!function_exists('mediumrare_header_style')) :
+function mediumrare_header_style() {
 
 	// If no custom options for text are set, let's bail
 	// get_header_textcolor() options: HEADER_TEXTCOLOR is default, hide text (returns 'blank') or any hex value
@@ -171,29 +171,29 @@ function readium_header_style() {
 
 	<?php
 }
-endif; // readium_header_style
+endif; // mediumrare_header_style
 
 
 /**
  * wp_customize settings
  */
-class Readium_Customize {
+class MediumRare_Customize {
 	public static function register($wp_customize) {
 		// add the sections
-		$wp_customize->add_section('readium_resources_header_image_section',
+		$wp_customize->add_section('mediumrare_resources_header_image_section',
 			array(
-				'title'			=> __('Resources Header Image', 'readium'),
+				'title'			=> __('Resources Header Image', 'mediumrare'),
 				'priority'		=> 65,
 				'capability'	=> 'edit_theme_options',
-				'description' 	=> __('Upload a header image to be shown on the resources section of the site <b style="color:#c00">(Please resize to 1600x840ish before uploading)</b>:', 'readium')
+				'description' 	=> __('Upload a header image to be shown on the resources section of the site <b style="color:#c00">(Please resize to 1600x840ish before uploading)</b>:', 'mediumrare')
 			)
 		);
-		$wp_customize->add_section('readium_header_options_section',
+		$wp_customize->add_section('mediumrare_header_options_section',
 			array(
-				'title'			=> __('Readium Header Style', 'readium'),
+				'title'			=> __('Medium Rare Header Style', 'mediumrare'),
 				'priority'		=> 55,
 				'capability'	=> 'edit_theme_options',
-				'description' 	=> __('How would you like the site title to be displayed?', 'readium')
+				'description' 	=> __('How would you like the site title to be displayed?', 'mediumrare')
 			)
 		);
 
@@ -206,7 +206,7 @@ class Readium_Customize {
 				'transport'	=> 'refresh',
 			)
 		);
-		$wp_customize->add_setting('readium_header_style',
+		$wp_customize->add_setting('mediumrare_header_style',
 			array(
 				'default' 	=> 'bar',
 				'type'		=> 'option',
@@ -214,7 +214,7 @@ class Readium_Customize {
 				'transport'	=> 'refresh',
 			)
 		);
-		$wp_customize->add_setting('readium_header_show_tagline',
+		$wp_customize->add_setting('mediumrare_header_show_tagline',
 			array(
 				'default' 	=> 0,
 				'type'		=> 'option',
@@ -229,16 +229,16 @@ class Readium_Customize {
 				$wp_customize,
 				'resources_header_image',
 				array(
-					'label' 	=> __('Resources Header Image', 'readium'),
-					'section'	=> 'readium_resources_header_image_section',
+					'label' 	=> __('Resources Header Image', 'mediumrare'),
+					'section'	=> 'mediumrare_resources_header_image_section',
 					'settings'	=> 'resources_header_image'
 				)
 			)
 		);
-		$wp_customize->add_control('readium_header_style',
+		$wp_customize->add_control('mediumrare_header_style',
 			array(
 				'label'   => 'Select the header style',
-				'section' => 'readium_header_options_section',
+				'section' => 'mediumrare_header_options_section',
 				'type'    => 'select',
 				'choices'    => array(
 					'bar' => 'Title in header bar',
@@ -246,10 +246,10 @@ class Readium_Customize {
 				),
 			) 
 		);
-		$wp_customize->add_control('readium_header_show_tagline',
+		$wp_customize->add_control('mediumrare_header_show_tagline',
 			array(
 				'label'   => 'Show the tagline? (Applies only when title is shown over the header image)',
-				'section' => 'readium_header_options_section',
+				'section' => 'mediumrare_header_options_section',
 				'type'    => 'select',
 				'choices'    => array(
 					0 => 'Do not show the tagline',
@@ -260,11 +260,11 @@ class Readium_Customize {
 	}
 }
 
-add_action('customize_register', array('Readium_Customize', 'register'));
+add_action('customize_register', array('MediumRare_Customize', 'register'));
 
-if (!function_exists('readium_custom_header_image')) :
+if (!function_exists('mediumrare_custom_header_image')) :
 // custom header image function
-function readium_custom_header_image() {
+function mediumrare_custom_header_image() {
 
 	$processed = array();
 	
@@ -278,7 +278,7 @@ function readium_custom_header_image() {
 	}
 	
 	// check for redium_resource pages, otherwise check for (other) singular pages
-	if (is_post_type_archive('readium_resource') || is_singular('readium_resource')) {
+	if (is_post_type_archive('mediumrare_resource') || is_singular('mediumrare_resource')) {
 		// set header_image to the resources image
 		$resources_image = get_theme_mod('resources_header_image');
 		if ($resources_image != '') {
@@ -307,8 +307,8 @@ function readium_custom_header_image() {
 	return $processed;
 
 }
-endif; // readium_custom_header_image
-add_action('wp_head', 'readium_custom_header_image');
+endif; // mediumrare_custom_header_image
+add_action('wp_head', 'mediumrare_custom_header_image');
 
 
 /**
@@ -316,7 +316,7 @@ add_action('wp_head', 'readium_custom_header_image');
  */
 
 // Custom comment output
-function readium_comment($comment, $args, $depth) {
+function mediumrare_comment($comment, $args, $depth) {
 		$GLOBALS['comment'] = $comment;
 		extract($args, EXTR_SKIP);
 		$args['avatar_size'] = 32;
@@ -357,7 +357,7 @@ function readium_comment($comment, $args, $depth) {
  * a version that has more markup and is
  * easier to style.
  */
-function readium_comment_form() {
+function mediumrare_comment_form() {
 	// define fields
 	$fields = array(
 		'author' => '<p class="form-item label-inline comment-form-author">' . '<label for="author">' . __( 'Name' ) . '</label> ' . ( $req ? '<span class="required">*</span>' : '' ) .
@@ -387,7 +387,7 @@ function readium_comment_form() {
 	// send them back out! Bam!
 	return $defaults;
 }
-add_filter('comment_form_defaults', 'readium_comment_form');
+add_filter('comment_form_defaults', 'mediumrare_comment_form');
 
 /**
  * Functions available in templates
@@ -403,12 +403,12 @@ if (!function_exists('get_author_posts_link')) {
 	}
 }
 
-function readium_get_header_style() {
-	return get_option('readium_header_style');
+function mediumrare_get_header_style() {
+	return get_option('mediumrare_header_style');
 }
 
-function readium_show_tagline() {
-	return get_option('readium_header_show_tagline');
+function mediumrare_show_tagline() {
+	return get_option('mediumrare_header_show_tagline');
 }
 
 // Function(s) to generate a list of links for sharing

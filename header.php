@@ -1,6 +1,6 @@
 <?php /*
 
-Readium Theme
+Medium Rare Theme
 -------------
 
 header.php
@@ -32,7 +32,7 @@ Header template file
 
 		<link rel="stylesheet" href="<?php echo get_stylesheet_uri(); ?>" type="text/css" media="screen" />
 
-		<?php readium_header_style(); ?>
+		<?php mediumrare_header_style(); ?>
 
 		<?php
 		// Javascript
@@ -43,11 +43,11 @@ Header template file
 			// pull in Nivo-gallery
 			wp_enqueue_script('nivo-lightbox', get_template_directory_uri() . '/lib/Nivo-Lightbox-1.1/nivo-lightbox.min.js', 'jquery', 1.0);
 		}
-		if (is_post_type_archive('readium_resource')) {
+		if (is_post_type_archive('mediumrare_resource')) {
 			wp_enqueue_script('masonry', get_template_directory_uri() . '/js/masonry.min.js', 'jquery', '3.1.3');
 		}
 		// pull in the site js
-		wp_enqueue_script('readium_js', get_template_directory_uri() . '/js/readium-script.js', 'jquery');
+		wp_enqueue_script('mediumrare_js', get_template_directory_uri() . '/js/mediumrare-script.js', 'jquery');
 
 		// comment script
 		if (is_singular() && get_option('thread_comments')) :
@@ -70,10 +70,10 @@ Header template file
 			<div id="page">
 				<div id="wrapper">
 					<?php
-						$header_image = readium_custom_header_image();
+						$header_image = mediumrare_custom_header_image();
 					?>
 					<header id="site-header"<?php echo (!$header_image) ? ' class="no-image"' : ' style="background-image:url(' . $header_image['url'] . ')"'; ?>>
-						<?php if (readium_get_header_style() == 'bar') : ?>
+						<?php if (mediumrare_get_header_style() == 'bar') : ?>
 						<div id="site-id">
 							<div class="grid">
 								<div class="g12 text-center">
@@ -83,20 +83,20 @@ Header template file
 							</div>
 						</div>
 						<?php endif; ?>
-						<?php if (is_singular() || is_post_type_archive('readium_resource')) : ?>
+						<?php if (is_singular() || is_post_type_archive('mediumrare_resource')) : ?>
 						<div id="page-header-overlay">
 							<div class="grid">
 								<div id="page-header-text" class="g12 text-center">
-									<h1 id="page-title"><?php if (!is_post_type_archive('readium_resource')) { the_title(); } else { ?>Resources<?php } ?></h1>
+									<h1 id="page-title"><?php if (!is_post_type_archive('mediumrare_resource')) { the_title(); } else { ?>Resources<?php } ?></h1>
 								</div>
 							</div>
 						</div>
-						<?php elseif (readium_get_header_style() == 'over_image') : ?>
+						<?php elseif (mediumrare_get_header_style() == 'over_image') : ?>
 						<div id="page-header-overlay">
 							<div class="grid">
 								<div id="page-header-text" class="g12 text-center">
 									<h1 id="site-title"><?php bloginfo('name'); ?></h1>
-									<?php if (readium_show_tagline()) : ?>
+									<?php if (mediumrare_show_tagline()) : ?>
 									<p><?php bloginfo('description'); ?></p>
 									<?php endif; ?>
 								</div>

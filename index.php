@@ -1,6 +1,6 @@
 <?php /*
 
-Readium Theme
+Medium Rare Theme
 -------------
 
 index.php
@@ -12,7 +12,7 @@ Main template file
 ?>
 
 <?php
-$is_resource = is_post_type_archive('readium_resource');
+$is_resource = is_post_type_archive('mediumrare_resource');
 ?>
 <?php get_header(); ?>
 

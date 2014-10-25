@@ -1,6 +1,6 @@
 <?php /*
 
-Readium Theme
+Medium Rare Theme
 -------------
 
 comments.php
@@ -30,7 +30,7 @@ if (post_password_required()) {
 				<ul class="comment-list">
 					<?php
 						wp_list_comments(array(
-							'callback'		=> 'readium_comment',
+							'callback'		=> 'mediumrare_comment',
 						));
 					?>
 				</ul><!-- close .comment-list -->
